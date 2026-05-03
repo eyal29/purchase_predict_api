@@ -9,10 +9,14 @@ dataset = pd.read_csv(os.path.join(path_kedro, "data", "03_primary", "primary.cs
 
 dataset = dataset.drop(["user_session", "user_id", "purchased"], axis=1)
 
+# response = requests.post(
+#     "http://146.148.67.208/predict",
+#     json=dataset.sample(n=10).to_json(),
+# )
+
 response = requests.post(
-    "http://127.0.0.1:5001/predict",
+    "https://purchase-predict-api-102907634051.europe-west1.run.app/predict",
     json=dataset.sample(n=10).to_json(),
 )
-
 print(response.status_code)
 print(response.json())
